@@ -1,0 +1,44 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int student[2][7];
+int n, personnel; // 총인원수, 최대 배정인원수
+int room;
+
+void input() {
+	cin >> n >> personnel;
+	int gender, year;
+	for (int i = 0; i < n; i++) {
+		cin >> gender >> year;
+		student[gender][year]++;
+	} // 입력 받은 수를 인덱스로 가진 배열에 카운트 추가
+}
+
+void solution() {
+	int girl = 0, boy = 0;
+	for (int i = 1; i < 7; i++) {
+		girl += student[0][i] / personnel; // 여자 방
+		if (student[0][i] % personnel != 0) {
+			girl += 1;
+		}
+	}
+	for (int i = 1; i < 7; i++) {
+		boy += student[1][i] / personnel; // 남자 방
+		if (student[1][i] % personnel != 0) {
+			boy += 1;
+		}
+	}
+	room = boy + girl; // 방 개수
+}
+
+int main() {
+	cin.tie(0);
+	ios_base::sync_with_stdio(0);
+
+	input();
+	solution();
+	cout << room;
+	
+	return 0;
+}
