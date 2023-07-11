@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector <int> multi_arr(10, 0);
+int a, b, c;
+long long result = 0;
+
+
+void input() {
+	cin >> a >> b >> c;
+	result = a * b * c;
+	for (int i = 0; i < 10; i++) {
+		multi_arr[result % 10] += 1;
+		result /= 10;
+		if (result == 0) {
+			break;
+		} 
+		/* 결과 값이 0이 될 경우 반복문 탈출
+		(0 인덱스 하나 추가 방지) */
+	}
+}
+
+void output() {
+	for (int i = 0; i < 10; i++) {
+		cout << multi_arr[i] << '\n';
+	}
+}
+
+int main() {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+
+	input();
+	output();
+
+	return 0;
+}
