@@ -1,0 +1,54 @@
+// acmicpc.net/problem/3273
+// author : 범조
+// 2023-05-22 pm04:05
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n;
+vector<int> sum_arr;
+int x;
+int element;
+int cnt = 0;
+
+
+void input() {
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> element;
+		sum_arr.push_back(element);
+	}
+	cin >> x;
+	sort(sum_arr.begin(), sum_arr.end());
+}
+
+void solution() {
+	int start = 0;
+	int end = sum_arr.size() - 1;
+	
+	while (start < end) {
+		int sum = sum_arr[start] + sum_arr[end];
+		if (sum == x) {
+			cnt += 1;
+		}
+
+		if (sum < x) {
+			start += 1;
+		}
+		else {
+			end -= 1;
+		}
+	}
+}
+int main() {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+
+	input();
+	solution();
+	cout << cnt;
+	return 0;
+}
+
+/* 2023-05-22 17:52 */
