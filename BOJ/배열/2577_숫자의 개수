@@ -2,37 +2,48 @@
 
 using namespace std;
 
-vector <int> multi_arr(10, 0);
-int a, b, c;
-long long result = 0;
-
+vector <int> num_set(10, 0);
+int n;
+int cnt = 0;
 
 void input() {
-	cin >> a >> b >> c;
-	result = a * b * c;
+	cin >> n;
 	for (int i = 0; i < 10; i++) {
-		multi_arr[result % 10] += 1;
-		result /= 10;
-		if (result == 0) {
+		num_set[n % 10] += 1;
+		n /= 10;
+		if (n == 0) {
 			break;
-		} 
-		/* 결과 값이 0이 될 경우 반복문 탈출
-		(0 인덱스 하나 추가 방지) */
+		}
+	} /* 나온 횟수 카운트 배열 */
+}
+
+void solve(){
+	int psame;
+	/* 6과 9는 동일시 */
+	psame = num_set[6] + num_set[9]; 
+	/* 짝 */
+	if (psame % 2 == 0) {
+		num_set[6] = psame / 2;
+	}
+	/* 홀 */
+	else {
+		num_set[6] = psame / 2 + 1;
+	}
+	num_set[9] = 0;
+	for (int i = 0; i < 10; i++) {
+		if (num_set[i] > cnt) {
+			cnt = num_set[i];
+		}
 	}
 }
 
-void output() {
-	for (int i = 0; i < 10; i++) {
-		cout << multi_arr[i] << '\n';
-	}
-}
 
 int main() {
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 
 	input();
-	output();
-
+	solve();
+	cout << cnt;
 	return 0;
 }
