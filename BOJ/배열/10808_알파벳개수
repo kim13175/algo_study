@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+vector<int> alpha_arr(26, 0);
+string s;
+
+void input() {
+	cin >> s;
+	/* 스트링배열의 값에 문자 a를 뻬는 
+	아스키코드 연산을 인덱스화시켜 구함 */
+	for (int i = 0; i < s.size(); i++) {
+		alpha_arr[s[i] - 'a'] += 1;
+	} 
+}
+
+void output() {
+	for (int i = 0; i < alpha_arr.size(); i++) {
+		cout << alpha_arr[i] << " ";
+	}
+}
+
+int main() {
+	cin.tie(0);
+	ios_base::sync_with_stdio(0);
+
+	input();
+	output();
+
+	return 0;
+}
