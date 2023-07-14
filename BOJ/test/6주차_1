@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+#define MAX 30005
+using namespace std;
+
+int n; // 접시 수
+int d; // 초밥 종류
+int k; // 연속해서 먹어야 할 접시 수
+int c; // 쿠폰 번호
+int dishes[MAX]; // 초밥 접시 배열
+int check[MAX]; // 중복
+int max_sushi;
+
+void input() {
+	cin >> n >> d >> k >> c;
+	for (int i = 0; i < n; i++) {
+		cin >> dishes[i];
+	}
+}
+
+void solve() {
+	for (int start = 0; start < n; start++) {
+		int same = 0;
+		int coupon = 0;
+		for (int i = start; i < start + k; i++) {
+			if (!check[dishes[i % n]]) check[dishes[i % n]] = 1;
+			else same += 1;
+		}
+		if (check[c] != 1) coupon = 1;
+		max_sushi = max(max_sushi, k - same + coupon);
+		memset(check, 0, sizeof(check)); // 다음 반복을 위한 메모리 초기화
+	}
+	cout << max_sushi;
+}
+
+int main() {
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+
+	input();
+	solve();
+
+	return 0;
+}
